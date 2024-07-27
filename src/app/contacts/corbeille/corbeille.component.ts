@@ -61,13 +61,13 @@ export class CorbeilleComponent implements OnInit {
   restorContact(contactId: number): void {
   const contacts: Contact[] = this.getContacts();
   const index = contacts.findIndex(c => c.id === contactId);
-
+  
   if (index !== -1) {
     swal({
-      title: "Es-tu sûr?",
-      text: "Voulez-vous vraiment supprimer ce contact?",
+      title: "Restaurer ce contact?",
+      text: "Vous allez restaurer ce contact.",
       icon: "warning",
-      buttons: ["Annuler", "Oui, supprimer"],
+      buttons: ["Annuler", "Oui, restaurer"],
       dangerMode: true,
     })
     .then((willDelete) => {
@@ -83,7 +83,7 @@ export class CorbeilleComponent implements OnInit {
         // Mettre à jour la liste des contacts affichés
         this.userContacts = this.userContacts.filter(contact => contact.id !== contactId);
 
-        swal("Le contact a été supprimé!", {
+        swal("Le contact a été restauré avec succès!", {
           icon: "success",
         });
       } else {

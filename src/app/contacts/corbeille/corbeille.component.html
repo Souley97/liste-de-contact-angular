@@ -28,8 +28,7 @@
           <td class="px-6 py-4 whitespace-nowrap">{{ contact.createdAt  | date}}</td>
           <td class="px-6 py-4 whitespace-nowrap">{{ contact.etat }}</td>
           <td class="px-6 py-4 whitespace-nowrap">
-            <button class="text-blue-500 hover:text-blue-700">Modifier</button>
-            <button class="text-red-500 hover:text-red-700 ml-2" (click)="restorContact(contact.id)">Supprimer</button>
+            <button class="text-red-500 hover:text-red-700 ml-2" (click)="restorContact(contact.id)">Restaurer</button>
           </td>
         </tr>
       </tbody>
