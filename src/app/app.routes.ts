@@ -5,10 +5,12 @@ import { CreateComponent } from './contacts/create/create.component';
 import { CorbeilleComponent } from './contacts/corbeille/corbeille.component';
 import { DetailComponent } from './contacts/detail/detail.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { RegisterComponent } from './users/register/register.component';
 
 export const routes: Routes = [
-    { "path": "", component: IndexComponent },
+    { "path": "contacts", component: IndexComponent },
     { "path": "login", component:LoginComponent},
+    { "path": "register", component:RegisterComponent},
     { "path": "create", component:CreateComponent},
     { "path": "corbeille", component:CorbeilleComponent},
     { "path": "details", component:DetailComponent},
