@@ -8,6 +8,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { RegisterComponent } from './users/register/register.component';
 
 export const routes: Routes = [
+    { "path": "", component: IndexComponent },
     { "path": "contacts", component: IndexComponent },
     { "path": "login", component:LoginComponent},
     { "path": "register", component:RegisterComponent},
