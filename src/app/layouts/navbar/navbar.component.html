@@ -6,7 +6,7 @@
         </svg>
         <span class="ml-3 text-xl">Contech</span>
       </a>
-      <nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
+      <nav *ngIf="currentUser" class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
         <a  routerLink="/contacts"  class="mr-5 hover:text-gray-900">Contacts</a>
         <a routerLink="/corbeille" class="mr-5 hover:text-gray-900">Corbeille</a>
    

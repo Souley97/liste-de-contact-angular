@@ -1,1 +1,12 @@
-<p>index works!</p>
+<div *ngIf="currentUser">
+    <h1>Bienvenue, {{ currentUser?.nom }}</h1>
+    <button (click)="logout()">Déconnexion</button>
+    
+    <!-- Ajoutez ici les fonctionnalités d'ajout et de visualisation des contacts -->
+    <p>Liste des contacts : </p>
+    <ul>
+      <!-- Exemple d'affichage des contacts -->
+      <li *ngFor="let contact of currentUser?.contacts">{{ contact.name }}</li>
+    </ul>
+  </div>
+  
