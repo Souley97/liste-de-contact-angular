@@ -11,20 +11,20 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  username: string = '';
-  password: string = '';
-  errorMessage: string = '';
+  public email: string = '';
+  public password: string = '';
+  public errorMessage: string = '';
 
   constructor(private router: Router) {}
 
   login(): void {
-    if (this.username === '' || this.password === '') {
+    if (this.email === '' || this.password === '') {
       this.errorMessage = 'Veuillez entrer le nom d\'utilisateur et le mot de passe.';
       return;
     }
 
     const users = JSON.parse(localStorage.getItem('users') || '[]');
-    const user = users.find((u: any) => u.email === this.username && u.password === this.password);
+    const user = users.find((u: any) => u.email === this.email && u.password === this.password);
 
     if (user) {
       // Stocker les informations de l'utilisateur dans localStorage
