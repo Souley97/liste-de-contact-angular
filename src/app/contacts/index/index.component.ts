@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { Contact } from '../create/create.component';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-index',
@@ -48,6 +49,22 @@ export class IndexComponent implements OnInit {
     const contacts: Contact[] = this.getContacts();
     const index = contacts.findIndex(c => c.id === contactId);
     if (index !== -1) {
+      swal({
+        title: "Es-tu sûr?",
+        text: "vous voulez supprimé cette contact,!",
+        icon: "warning",
+        dangerMode: true,
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+          swal("Poof! Your imaginary file has been deleted!", {
+            icon: "success",
+          });
+        } else {
+          swal("Your imaginary file is safe!");
+        }
+      });
+
       contacts[index].etat = 'inactif';
       contacts[index].updatedAt = new Date();
       contacts[index].updatedBy = this.currentUserId!;

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Contact } from '../create/create.component';
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import swal from 'sweetalert';
+
 
 @Component({
   selector: 'app-corbeille',
@@ -51,4 +53,46 @@ export class CorbeilleComponent implements OnInit {
     localStorage.removeItem('currentUser');
     this.router.navigate(['/login']);
   }
+
+  getContacts(): Contact[] {
+    return JSON.parse(localStorage.getItem('contacts') || '[]');
+  }
+  // Méthode pour effectuer une suppression logique d'un contact
+  restorContact(contactId: number): void {
+  const contacts: Contact[] = this.getContacts();
+  const index = contacts.findIndex(c => c.id === contactId);
+
+  if (index !== -1) {
+    swal({
+      title: "Es-tu sûr?",
+      text: "Voulez-vous vraiment supprimer ce contact?",
+      icon: "warning",
+      buttons: ["Annuler", "Oui, supprimer"],
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        // Mettre à jour l'état du contact
+        contacts[index].etat = 'actif';
+        contacts[index].updatedAt = new Date();
+        contacts[index].updatedBy = this.currentUserId!;
+
+        // Sauvegarder les modifications dans le localStorage
+        localStorage.setItem('contacts', JSON.stringify(contacts));
+
+        // Mettre à jour la liste des contacts affichés
+        this.userContacts = this.userContacts.filter(contact => contact.id !== contactId);
+
+        swal("Le contact a été supprimé!", {
+          icon: "success",
+        });
+      } else {
+        swal("Le contact est en sécurité!", {
+          icon: "info",
+        });
+      }
+    });
+  }
+}
+
 }
