@@ -14,7 +14,7 @@ export interface Contact {
   createdAt: Date;
   createdBy: number;
   updatedAt?: Date;
-  updatedBy?: number;
+  updatedBy: number;
   description?: string;
 }
 @Component({

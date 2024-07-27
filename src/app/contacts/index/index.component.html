@@ -9,7 +9,7 @@
           <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Prénom</th>
           <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
           <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Téléphone</th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Téléphone</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">User</th>
           <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">date</th>
           <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">État</th>
           <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
@@ -21,15 +21,16 @@
           <td class="px-6 py-4 whitespace-nowrap">{{ contact.prenom }}</td>
           <td class="px-6 py-4 whitespace-nowrap">{{ contact.email }}</td>
           <td class="px-6 py-4 whitespace-nowrap">{{ contact.telephone }}</td>
-          <td class="px-6 py-4 whitespace-nowrap">{{ contact.createdBy  }}</td>
-          <td class="px-6 py-4 whitespace-nowrap">{{ contact.createdAt  | date}}</td>
+          <td class="px-6 py-4 whitespace-nowrap">{{ contact.createdBy }}</td>
+          <td class="px-6 py-4 whitespace-nowrap">{{ contact.createdAt | date }}</td>
           <td class="px-6 py-4 whitespace-nowrap">{{ contact.etat }}</td>
           <td class="px-6 py-4 whitespace-nowrap">
-            <button class="text-blue-500 hover:text-blue-700">Modifier</button>
-            <button class="text-red-500 hover:text-red-700 ml-2">Supprimer</button>
+            <!-- <button class="text-blue-500 hover:text-blue-700" (click)="editContact(contact)">Modifier</button> -->
+            <button class="text-red-500 hover:text-red-700 ml-2" (click)="softDeleteContact(contact.id)">Supprimer</button>
           </td>
         </tr>
       </tbody>
+      
     </table>
         <button (click)="logout()">Déconnexion</button>
 
