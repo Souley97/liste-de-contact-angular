@@ -1,1 +1,22 @@
-<p>corbeille works!</p>
+<h2>Contact List</h2>
+<input [(ngModel)]="filter" (ngModelChange)="applyFilter()" placeholder="Search...">
+<button (click)="addContact()">Add Contact</button>
+
+<h3>Active Contacts</h3>
+<ul>
+  <li *ngFor="let contact of filteredContacts">
+    {{ contact.firstName }} {{ contact.lastName }} - {{ contact.email }}
+    <button (click)="viewDetails(contact.id)">View</button>
+    <button (click)="editContact(contact.id)">Edit</button>
+    <button (click)="deleteContact(contact.id)">Delete</button>
+  </li>
+</ul>
+
+<h3>Deleted Contacts</h3>
+<ul>
+  <li *ngFor="let contact of deletedContacts">
+    {{ contact.firstName }} {{ contact.lastName }} - {{ contact.email }}
+    <button (click)="restoreContact(contact.id)">Restore</button>
+  </li>
+</ul>
+
