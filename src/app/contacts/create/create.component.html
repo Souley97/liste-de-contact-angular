@@ -1,1 +1,35 @@
-<p>create works!</p>
+<div>
+    <button (click)="openAddContactPopup()">Ajouter un contact</button>
+    <div *ngIf="isAddContactPopupOpen" class="popup">
+      <h2>Ajouter un contact</h2>
+      <form (ngSubmit)="addContact()">
+        <label for="nom">Nom:</label>
+        <input type="text" id="nom" [(ngModel)]="contact.nom" name="nom" required>
+        
+        <label for="prenom">Prénom:</label>
+        <input type="text" id="prenom" [(ngModel)]="contact.prenom" name="prenom" required>
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" [(ngModel)]="contact.email" name="email" required>
+        
+        <label for="telephone">Téléphone:</label>
+        <input type="tel" id="telephone" [(ngModel)]="contact.telephone" name="telephone" required>
+        
+        <label for="description">Description:</label>
+        <textarea id="description" [(ngModel)]="contact.description" name="description"></textarea>
+        
+        <button type="submit">Ajouter</button>
+        <button type="button" (click)="closeAddContactPopup()">Annuler</button>
+      </form>
+    </div>
+  </div>
+  
+  <div>
+    <h2>Liste des contacts</h2>
+    <ul>
+      <li *ngFor="let contact of contacts">
+        {{ contact.nom }} {{ contact.prenom }} - {{ contact.email }} - {{ contact.telephone }}
+      </li>
+    </ul>
+  </div>
+  
