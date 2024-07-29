@@ -4,11 +4,12 @@ import { Router, RouterLink } from '@angular/router';
 import swal from 'sweetalert';
 import { FormsModule } from '@angular/forms';
 import { Contact } from '../contacts.module';
+import { DetailComponent } from '../detail/detail.component';
 
 @Component({
   selector: 'app-index',
   standalone: true,
-  imports: [CommonModule, RouterLink, FormsModule],
+  imports: [CommonModule, RouterLink, FormsModule ,DetailComponent],
   templateUrl: './index.component.html',
   styleUrl: './index.component.css',
 })
@@ -104,5 +105,17 @@ export class IndexComponent implements OnInit {
   }
   editContact(contactId: number): void {
     this.router.navigate(['/update', contactId]);
+  }
+
+  selectedContact: Contact | null = null;
+
+  showDetail(contact: Contact) {
+    this.selectedContact = contact;
+    // Ouvrir le modal
+  }
+
+  closeModal() {
+    this.selectedContact = null;
+    // Fermer le modal
   }
 }

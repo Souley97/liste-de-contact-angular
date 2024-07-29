@@ -4,15 +4,21 @@ import { Router, RouterLink } from '@angular/router';
 import { Contact } from '../create/create.component';
 import swal from 'sweetalert';
 import { FormsModule } from '@angular/forms';
+import { DetailComponent } from "../detail/detail.component";
 
 @Component({
   selector: 'app-index',
   standalone: true,
-  imports: [CommonModule, RouterLink, FormsModule],
+  imports: [CommonModule, RouterLink, FormsModule, DetailComponent],
   templateUrl: './index.component.html',
   styleUrl: './index.component.css',
 })
 export class IndexComponent implements OnInit {
+showDetail: any;
+selectedContact: any;
+editContact(arg0: number) {
+throw new Error('Method not implemented.');
+}
   contacts: Contact[] = [];
   userContacts: Contact[] = [];
   filteredContacts: Contact[] = [];

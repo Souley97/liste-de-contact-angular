@@ -14,7 +14,7 @@ export const routes: Routes = [
     { "path": "register", component:RegisterComponent},
     { "path": "create", component:CreateComponent},
     { "path": "corbeille", component:CorbeilleComponent},
-    { "path": "details", component:DetailComponent},
+    { "path": "detail/:id", component:DetailComponent},
     { "path": "**", component:PageNotFoundComponent},
 
 
