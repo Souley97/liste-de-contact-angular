@@ -1,0 +1,14 @@
+main {
+    padding: 20px;
+  }
+  
+  .popup {
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+  }
+  
+  button {
+    margin: 5px;
+  }
+  

@@ -1,3 +1,4 @@
+// create.component.ts
 import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -39,7 +40,7 @@ export class CreateComponent implements OnInit {
     updatedBy: 'user',
     description: ''
   };
-  isAddContactPopupOpen: boolean = false;
+  showForm: boolean = false;
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
@@ -53,6 +54,7 @@ export class CreateComponent implements OnInit {
     if (isPlatformBrowser(this.platformId)) {
       try {
         this.contacts = JSON.parse(localStorage.getItem('contacts') || '[]');
+        console.log('Contacts chargés:', this.contacts);
       } catch (e) {
         console.error('Erreur lors du chargement des contacts:', e);
         this.contacts = [];
@@ -61,6 +63,7 @@ export class CreateComponent implements OnInit {
   }
 
   addContact() {
+    console.log('Formulaire soumis', this.contact);
     if (!this.validateContact(this.contact)) {
       alert('Veuillez vérifier les informations du contact.');
       return;
@@ -73,7 +76,7 @@ export class CreateComponent implements OnInit {
     this.saveContacts();
     alert('Contact ajouté avec succès');
     this.resetForm();
-    this.closeAddContactPopup();
+    this.cancelForm(); // Ferme le formulaire après ajout
   }
 
   validateContact(contact: Contact): boolean {
@@ -98,18 +101,15 @@ export class CreateComponent implements OnInit {
     };
   }
 
-  openAddContactPopup() {
-    this.isAddContactPopupOpen = true;
-  }
-
-  closeAddContactPopup() {
-    this.isAddContactPopupOpen = false;
+  cancelForm() {
+    this.showForm = false;
   }
 
   private saveContacts() {
     if (isPlatformBrowser(this.platformId)) {
       try {
         localStorage.setItem('contacts', JSON.stringify(this.contacts));
+        console.log('Contacts sauvegardés:', this.contacts);
       } catch (e) {
         console.error('Erreur lors de la sauvegarde des contacts:', e);
       }
