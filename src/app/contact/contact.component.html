@@ -1,0 +1,139 @@
+<!-- En-tête de la page -->
+<header>
+    <nav>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+        <!-- Bouton pour ouvrir le popup d'ajout de contact -->
+        <button (click)="openAddContactPopup()">Ajouter un contact</button>
+        <!-- Bouton pour ouvrir le popup de la corbeille -->
+        <button (click)="openTrashPopup()">Voir la corbeille</button>
+    </nav>
+</header>
+
+<!-- Titre principal de la section -->
+<h1>Liste des contacts</h1>
+
+
+
+
+<!-- Conteneur pour le champ de recherche
+<div class="input-container">
+    Champ de recherche pour filtrer les contacts 
+    <input class="search" type="text" [(ngModel)]="searchTerm" (input)="searchContacts()" placeholder="  Rechercher par nom ou numéro">
+</div> -->
+
+
+
+
+
+<!-- Tableau des contacts -->
+<table>
+    <thead>
+        <tr>
+            <!-- En-têtes des colonnes du tableau -->
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Email</th>
+            <th>Téléphone</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Ligne pour chaque contact dans le tableau -->
+        <tr *ngFor="let contact of contacts">
+            <td>{{ contact.nom }}</td> <!-- Nom du contact -->
+            <td>{{ contact.prenom }}</td> <!-- Prénom du contact -->
+            <td>{{ contact.email }}</td> <!-- Email du contact -->
+            <td>{{ contact.telephone }}</td> <!-- Téléphone du contact -->
+            <td>
+                <!-- Icône pour éditer le contact -->
+                <a (click)="editContact(contact.id)" title="Modifier">
+                    <i class="fa-regular fa-pen-to-square" style="color: green;"></i>
+                </a>
+                <!-- Icône pour supprimer le contact -->
+                <a (click)="deleteContact(contact.id)" title="Supprimer">
+                    <i class="fa-solid fa-trash" style="color: red;"></i>
+                </a>
+                <!-- Icône pour voir les détails du contact -->
+                <a (click)="viewDetails(contact.id)" title="Voir les détails">
+                    <i class="fa-solid fa-eye" style="color: gray;"></i>
+                </a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- Popup pour ajouter ou modifier un contact -->
+<div *ngIf="isAddContactPopupOpen" class="popup">
+    <div class="popup-content">
+        <!-- Bouton pour fermer le popup d'ajout/modification -->
+        <span class="close" (click)="closeAddContactPopup()">&times;</span>
+        <form (ngSubmit)="addContact()">
+            <!-- Titre du formulaire selon si un contact est en cours de modification ou non -->
+            <h1>{{ editingContactId !== null ? 'Modifier le contact' : 'Ajouter un contact' }}</h1>
+            <div>
+                <!-- Champ pour entrer le nom du contact -->
+                <label for="nom">Nom:</label>
+                <input type="text" id="nom" [(ngModel)]="contact.nom" name="nom" required>
+            </div>
+            <div>
+                <!-- Champ pour entrer le prénom du contact -->
+                <label for="prenom">Prénom:</label>
+                <input type="text" id="prenom" [(ngModel)]="contact.prenom" name="prenom" required>
+            </div>
+            <div>
+                <!-- Champ pour entrer l'email du contact -->
+                <label for="email">Email:</label>
+                <input type="email" id="email" [(ngModel)]="contact.email" name="email" required>
+            </div>
+            <div>
+                <!-- Champ pour entrer le téléphone du contact -->
+                <label for="telephone">Téléphone:</label>
+                <input type="tel" id="telephone" [(ngModel)]="contact.telephone" name="telephone" required>
+            </div>
+            <div>
+                <!-- Champ pour entrer une description du contact -->
+                <label for="description">Description:</label>
+                <textarea id="description" [(ngModel)]="contact.description" name="description" required></textarea>
+            </div>
+            <!-- Bouton pour soumettre le formulaire -->
+            <button type="submit" class="bouton">{{ editingContactId !== null ? 'Modifier' : 'Ajouter' }} le contact</button>
+        </form>
+    </div>
+</div>
+
+<!-- Popup pour voir la corbeille des contacts supprimés -->
+<div *ngIf="isTrashPopupOpen" class="popup">
+    <div class="popup-content2">
+        <!-- Bouton pour fermer le popup de la corbeille -->
+        <span class="close" (click)="closeTrashPopup()">&times;</span>
+        <!-- Titre du popup de la corbeille -->
+        <h2>Corbeille</h2>
+        <!-- Tableau des contacts supprimés -->
+        <table class="matable">
+            <thead>
+                <tr>
+                    <!-- En-têtes des colonnes du tableau de la corbeille -->
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Email</th>
+                    <th>Téléphone</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Ligne pour chaque contact dans la corbeille -->
+                <tr *ngFor="let contact of trash">
+                    <td>{{ contact.nom }}</td> <!-- Nom du contact supprimé -->
+                    <td>{{ contact.prenom }}</td> <!-- Prénom du contact supprimé -->
+                    <td>{{ contact.email }}</td> <!-- Email du contact supprimé -->
+                    <td>{{ contact.telephone }}</td> <!-- Téléphone du contact supprimé -->
+                    <td>
+                        <!-- Bouton pour restaurer le contact supprimé -->
+                        <button (click)="restoreContact(contact.id)" class="bouton">Restaurer</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
