@@ -1,10 +1,10 @@
-// create.component.ts
-import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Component, NgModule, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { isPlatformBrowser } from '@angular/common';
 
-interface Contact {
+export interface Contact {
   id: number;
   nom: string;
   prenom: string;
@@ -12,10 +12,11 @@ interface Contact {
   telephone: string;
   etat: string;
   createdAt: Date;
-  createdBy: string;
-  updatedAt: Date;
-  updatedBy: string;
-  description: string;
+  createdBy: number;
+  updatedAt?: Date;
+  updatedBy: number;
+  description?: string;
+  userName?: string; // Nom de l'utilisateur qui a ajouté le contact
 }
 
 @Component({
@@ -35,18 +36,23 @@ export class CreateComponent implements OnInit {
     telephone: '',
     etat: 'active',
     createdAt: new Date(),
-    createdBy: 'user',
+    createdBy: 0,
     updatedAt: new Date(),
-    updatedBy: 'user',
-    description: ''
+    updatedBy: 0,
+    description: '',
+    userName: ''
   };
   showForm: boolean = false;
+  editMode: boolean = false;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor(
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
-      this.loadContacts();
+      this.loadContacts(); // Charger les contacts depuis localStorage
     }
   }
 
@@ -62,6 +68,12 @@ export class CreateComponent implements OnInit {
     }
   }
 
+  openForm() {
+    this.showForm = true;
+    this.resetForm();
+    this.editMode = false;
+  }
+
   addContact() {
     console.log('Formulaire soumis', this.contact);
     if (!this.validateContact(this.contact)) {
@@ -69,14 +81,40 @@ export class CreateComponent implements OnInit {
       return;
     }
 
-    this.contact.id = new Date().getTime();
+    this.contact.id = new Date().getTime(); // Générer un ID unique
     this.contact.createdAt = new Date();
     this.contact.updatedAt = new Date();
+    this.contact.createdBy = this.getUserId(); // Ajouter l'identifiant de l'utilisateur
+    this.contact.updatedBy = this.getUserId(); // Ajouter l'identifiant de l'utilisateur
+    this.contact.userName = this.getUserName(); // Ajouter le nom de l'utilisateur
     this.contacts.push(this.contact);
     this.saveContacts();
     alert('Contact ajouté avec succès');
     this.resetForm();
     this.cancelForm(); // Ferme le formulaire après ajout
+  }
+
+  editContact(contact: Contact) {
+    this.contact = { ...contact };
+    this.showForm = true;
+    this.editMode = true;
+  }
+
+  updateContact() {
+    console.log('Formulaire modifié', this.contact);
+    if (!this.validateContact(this.contact)) {
+      alert('Veuillez vérifier les informations du contact.');
+      return;
+    }
+
+    const index = this.contacts.findIndex(c => c.id === this.contact.id);
+    if (index !== -1) {
+      this.contacts[index] = { ...this.contact, updatedAt: new Date(), updatedBy: this.getUserId() };
+      this.saveContacts();
+      alert('Contact modifié avec succès');
+      this.resetForm();
+      this.cancelForm(); // Ferme le formulaire après modification
+    }
   }
 
   validateContact(contact: Contact): boolean {
@@ -94,10 +132,11 @@ export class CreateComponent implements OnInit {
       telephone: '',
       etat: 'active',
       createdAt: new Date(),
-      createdBy: 'user',
+      createdBy: 0,
       updatedAt: new Date(),
-      updatedBy: 'user',
-      description: ''
+      updatedBy: 0,
+      description: '',
+      userName: ''
     };
   }
 
@@ -114,5 +153,17 @@ export class CreateComponent implements OnInit {
         console.error('Erreur lors de la sauvegarde des contacts:', e);
       }
     }
+  }
+
+  // Méthode pour obtenir l'identifiant de l'utilisateur connecté
+  private getUserId(): number {
+    // Remplacez ceci par votre logique pour obtenir l'identifiant utilisateur réel
+    return 123; // Exemple d'ID utilisateur
+  }
+
+  // Méthode pour obtenir le nom de l'utilisateur connecté
+  private getUserName(): string {
+    // Remplacez ceci par votre logique pour obtenir le nom utilisateur réel
+    return 'Utilisateur Test'; // Exemple de nom d'utilisateur
   }
 }
