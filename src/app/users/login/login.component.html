@@ -12,7 +12,7 @@
                     <h4 class="mb-12 mt-1 pb-1 text-xl font-semibold">Connexion</h4>
                   </div>
                   <form (ngSubmit)="login()">
-                    <p class="mb-4">Please login to your account</p>
+                    <p class="mb-4">Veuillez vous connecter à votre compte</p>
                     <div class="relative mb-4">
                       <input
                         type="text"
@@ -41,21 +41,24 @@
                         Log in
                       </button>
                       <p *ngIf="errorMessage" class="text-red-600">{{ errorMessage }}</p>
-                      <a href="#">Forgot password?</a>
+                      <a href="#">Mot de passe oublié</a>
                     </div>
-                    <div class="flex items-center justify-between pb-6">
-                      <p class="mb-0">Don't have an account?</p>
-                      <button routerLink="/register" class="inline-block rounded border-2 px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal transition duration-150 ease-in-out">
-                        Register
-                      </button>
-                    </div>
+                    
                   </form>
+                  <div class="flex items-center justify-between pb-6">
+                    <p class="mb-0">Vous n'avez pas de compte ?
+                    </p>
+                    <button routerLink="/register" class="inline-block rounded border-2 px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal transition duration-150 ease-in-out">
+                      Register
+                    </button>
+                  </div>
                 </div>
               </div>
               <div class="flex items-center rounded-b-lg lg:w-6/12 lg:rounded-e-lg lg:rounded-bl-none" style="background: linear-gradient(to right, #2435ee, #1c68d3, #dd3675, #b44593)">
                 <div class="px-4 py-6 text-white md:mx-6 md:p-12">
-                  <h4 class="mb-6 text-xl font-semibold">We are more than just a company</h4>
-                  <p class="text-sm">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                  <h4 class="mb-6 text-xl font-semibold">Rejoignez notre communauté
+                  </h4>
+                  <p class="text-sm">Devenez membre de notre communauté dynamique et profitez d'avantages exclusifs ! </p>
                 </div>
               </div>
             </div>

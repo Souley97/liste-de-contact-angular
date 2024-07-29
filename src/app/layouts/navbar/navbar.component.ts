@@ -25,6 +25,7 @@ export class NavbarComponent implements OnInit {
     } else {
       // Rediriger vers la page de login si non connecté
       this.router.navigate(['/login']);
+      this.router.navigate(['/register']);
     }
   }
 }
