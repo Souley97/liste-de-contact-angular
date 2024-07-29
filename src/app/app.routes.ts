@@ -6,6 +6,7 @@ import { CorbeilleComponent } from './contacts/corbeille/corbeille.component';
 import { DetailComponent } from './contacts/detail/detail.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { RegisterComponent } from './users/register/register.component';
+import { UpdateComponent } from './contacts/update/update.component';
 
 export const routes: Routes = [
     { "path": "", component: IndexComponent },
@@ -15,6 +16,7 @@ export const routes: Routes = [
     { "path": "create", component:CreateComponent},
     { "path": "corbeille", component:CorbeilleComponent},
     { "path": "detail/:id", component:DetailComponent},
+    { "path": "update/:id", component:UpdateComponent},
     { "path": "**", component:PageNotFoundComponent},
 
 
