@@ -1,1 +1,85 @@
-<p>create works!</p>
+<section class="gradient-form h-full bg-neutral-200 dark:bg-neutral-700">
+    <div class="container h-full p-10">
+      <div class="flex h-full flex-wrap items-center justify-center text-neutral-800 dark:text-neutral-200">
+        <div class="w-full">
+          <div class="block rounded-lg bg-white shadow-lg dark:bg-neutral-800">
+            <div class="g-0 lg:flex lg:flex-wrap">
+              <div class="px-4 md:px-0 lg:w-6/12">
+                <div class="md:mx-6 md:p-12">
+                  <div class="text-center">
+                    <h4 class="mb-12 mt-1 pb-1 text-xl font-semibold">Ajouter un Contact</h4>
+                  </div>
+                  <form (ngSubmit)="saveContact()">
+                    <div class="relative mb-4">
+                      <input
+                        type="text"
+                        class="peer block min-h-[auto] w-full rounded border-1 rounded-b-lg bg-gray-200 px-6"
+                        [(ngModel)]="nom"
+                        name="nom"
+                        placeholder="Nom"
+                        required />
+                      <label class="pointer-events-none absolute left-3 top-0 mb-0 text-neutral-500 transition-all duration-200 ease-out">Nom</label>
+                    </div>
+                    <div class="relative mb-4">
+                      <input
+                        type="text"
+                        class="peer block min-h-[auto] w-full rounded border-1 rounded-b-lg bg-gray-200 px-6"
+                        [(ngModel)]="prenom"
+                        name="prenom"
+                        placeholder="Prénom"
+                        required />
+                      <label class="pointer-events-none absolute left-3 top-0 mb-0 text-neutral-500 transition-all duration-200 ease-out">Prénom</label>
+                    </div>
+                    <div class="relative mb-4">
+                      <input
+                        type="email"
+                        class="peer block min-h-[auto] w-full rounded border-1 rounded-b-lg bg-gray-200 px-6"
+                        [(ngModel)]="email"
+                        name="email"
+                        placeholder="Email"
+                        required />
+                      <label class="pointer-events-none absolute left-3 top-0 mb-0 text-neutral-500 transition-all duration-200 ease-out">Email</label>
+                    </div>
+                    <div class="relative mb-4">
+                      <input
+                        type="tel"
+                        class="peer block min-h-[auto] w-full rounded border-1 rounded-b-lg bg-gray-200 px-6"
+                        [(ngModel)]="telephone"
+                        name="telephone"
+                        placeholder="Téléphone"
+                        required />
+                      <label class="pointer-events-none absolute left-3 top-0 mb-0 text-neutral-500 transition-all duration-200 ease-out">Téléphone</label>
+                    </div>
+                    <div class="relative mb-4">
+                      <textarea
+                        class="peer block min-h-[auto] w-full rounded border-1 rounded-b-lg bg-gray-200 px-6"
+                        [(ngModel)]="description"
+                        name="description"
+                        placeholder="Description"></textarea>
+                      <label class="pointer-events-none absolute left-3 top-0 mb-0 text-neutral-500 transition-all duration-200 ease-out">Description</label>
+                    </div>
+                    <div class="mb-12 pb-1 pt-1 text-center">
+                      <button
+                        class="mb-3 inline-block w-full rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-dark-3 transition duration-150 ease-in-out"
+                        type="submit"
+                        style="background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);">
+                        Ajouter le Contact
+                      </button>
+                      <p *ngIf="errorMessage" class="text-red-600">{{ errorMessage }}</p>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div class="flex items-center rounded-b-lg lg:w-6/12 lg:rounded-e-lg lg:rounded-bl-none" style="background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593)">
+                <div class="px-4 py-6 text-white md:mx-6 md:p-12">
+                  <h4 class="mb-6 text-xl font-semibold">Rejoignez notre communauté</h4>
+                  <p class="text-sm">Ajoutez des contacts et restez en contact avec vos amis et collègues.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  

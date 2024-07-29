@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
+import { Contact } from '../create/create.component';
 import swal from 'sweetalert';
 import { FormsModule } from '@angular/forms';
-import { Contact } from '../contacts.module';
 
 @Component({
   selector: 'app-index',
@@ -15,22 +15,16 @@ import { Contact } from '../contacts.module';
 export class IndexComponent implements OnInit {
   contacts: Contact[] = [];
   userContacts: Contact[] = [];
+  filteredContacts: Contact[] = [];
   currentUserId: number | null = null;
-// filter
-  filteredContacts: Contact[] = []; // Liste des contacts filtrés
   searchText: string = '';
 
-  constructor(private router: Router) {
-    this.filteredContacts = this.userContacts; // Initialiser la liste filtrée
-
-  }
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     // Récupérer les contacts depuis le localStorage
-    const storedContacts = JSON.parse(localStorage.getItem('contacts') || '[]');
-    this.contacts = storedContacts;
-    this.filteredContacts = this.contacts; // Initialiser la liste filtrée
-
+    this.contacts = this.getContacts();
+    this.filteredContacts = this.contacts;
 
     // Récupérer l'utilisateur actuel
     const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
@@ -39,20 +33,16 @@ export class IndexComponent implements OnInit {
     // Filtrer les contacts par l'utilisateur actuel
     if (this.currentUserId !== null) {
       this.userContacts = this.contacts.filter(contact => contact.createdBy === this.currentUserId && contact.etat === 'actif');
-      this.filteredContacts = this.contacts.filter(contact => contact.createdBy === this.currentUserId && contact.etat === 'actif');
-
     }
 
-    
+    this.filterContacts();
   }
 
-  // Méthode pour déconnecter l'utilisateur
   logout(): void {
     localStorage.removeItem('currentUser');
     this.router.navigate(['/login']);
   }
 
-  // Méthode pour obtenir les contacts depuis le localStorage
   getContacts(): Contact[] {
     return JSON.parse(localStorage.getItem('contacts') || '[]');
   }
@@ -101,8 +91,5 @@ export class IndexComponent implements OnInit {
       contact.email.toLowerCase().includes(lowerCaseSearchText) ||
       contact.telephone.toLowerCase().includes(lowerCaseSearchText)
     );
-  }
-  editContact(contactId: number): void {
-    this.router.navigate(['/update', contactId]);
   }
 }

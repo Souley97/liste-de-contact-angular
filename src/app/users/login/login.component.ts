@@ -11,9 +11,10 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  email: string = '';
-  password: string = '';
-  errorMessage: string = '';
+
+  public email: string = '';
+  public password: string = '';
+  public errorMessage: string = '';
 
   constructor(private router: Router) {}
 
