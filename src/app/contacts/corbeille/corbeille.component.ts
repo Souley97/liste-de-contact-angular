@@ -3,12 +3,13 @@ import { Contact } from '../create/create.component';
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import swal from 'sweetalert';
+import { DetailComponent } from "../detail/detail.component";
 
 
 @Component({
   selector: 'app-corbeille',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, DetailComponent],
   templateUrl: './corbeille.component.html',
   styleUrl: './corbeille.component.css'
 })
@@ -95,4 +96,19 @@ export class CorbeilleComponent implements OnInit {
   }
 }
 
+editContact(contactId: number): void {
+  this.router.navigate(['/update', contactId]);
+}
+
+selectedContact: Contact | null = null;
+
+showDetail(contact: Contact) {
+  this.selectedContact = contact;
+  // Ouvrir le modal
+}
+
+closeModal() {
+  this.selectedContact = null;
+  // Fermer le modal
+}
 }

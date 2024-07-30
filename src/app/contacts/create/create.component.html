@@ -1,79 +1,156 @@
-<section class="gradient-form h-full bg-neutral-200 dark:bg-neutral-700">
-    <div class="container h-full p-10">
-      <div class="flex h-full flex-wrap items-center justify-center text-neutral-800 dark:text-neutral-200">
-        <div class="w-full">
-          <div class="block rounded-lg bg-white shadow-lg dark:bg-neutral-800">
-            <div class="g-0 lg:flex lg:flex-wrap">
-              <div class="px-4 md:px-0 lg:w-6/12">
-                <div class="md:mx-6 md:p-12">
-                  <div class="text-center">
-                    <h4 class="mb-12 mt-1 pb-1 text-xl font-semibold">Ajouter un Contact</h4>
-                  </div>
-                  <form (ngSubmit)="saveContact()">
-                    <div class="relative mb-4">
-                      <input
-                        type="text"
-                        class="peer py-4 block min-h-[auto] w-full rounded border-1 rounded-b-lg bg-gray-200 px-6"
-                        [(ngModel)]="nom"
-                        name="nom"
-                        placeholder="Nom"
-                        required />
-                    </div>
-                    <div class="relative mb-4">
-                      <input
-                        type="text"
-                        class="peer  py-4 block min-h-[auto] w-full rounded border-1 rounded-b-lg bg-gray-200 px-6"
-                        [(ngModel)]="prenom"
-                        name="prenom"
-                        placeholder="Prénom"
-                        required />
-                    </div>
-                    <div class="relative mb-4">
-                      <input
-                        type="email"
-                        class="peer block  py-4 min-h-[auto] w-full rounded border-1 rounded-b-lg bg-gray-200 px-6"
-                        [(ngModel)]="email"
-                        name="email"
-                        placeholder="Email"
-                        required />
-                    </div>
-                    <div class="relative mb-4">
-                      <input
-                        type="tel"
-                        class="peer block  py-4 min-h-[auto] w-full rounded border-1 rounded-b-lg bg-gray-200 px-6"
-                        [(ngModel)]="telephone"
-                        name="telephone"
-                        placeholder="Téléphone"
-                        required />
-                    </div>
-                    <div class="relative mb-4">
-                      <textarea
-                        class="peer block   py-8 min-h-[auto] w-full rounded border-1 rounded-b-lg bg-gray-200 px-6"
-                        [(ngModel)]="description"
-                        name="description"
-                        placeholder="Description"></textarea>
-                    </div>
-                    <div class="mb-12 pb-1 pt-1 text-center">
-                      <button
-                        class="mb-3 inline-block w-full rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-dark-3 transition duration-150 ease-in-out"
-                        type="submit"
-                        style="background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);">
-                        Ajouter le Contact
-                      </button>
-                      <p *ngIf="errorMessage" class="text-red-600">{{ errorMessage }}</p>
-                    </div>
-                  </form>
-                </div>
+<div class="flex h-screen bg-gray-100">
+
+  <!-- sidebar -->
+  <div class="hidden md:flex flex-col w-64 bg-gray-800 rounded-2xl">
+      
+      <div class="flex flex-col flex-1 overflow-y-auto">
+        <nav class="flex flex-col flex-1 overflow-y-auto bg-gradient-to-b from-gray-700 to-blue-500 px-2 py-4 gap-10 rounded-2xl">
+          <div>
+              <a href="#" class="flex items-center px-4 py-2 text-gray-100 hover:bg-gray-700">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24"
+                      stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M4 6h16M4 12h16M4 18h16" />
+                  </svg>
+                  Dashboard
+              </a>
+          </div>
+          <div class="flex flex-col flex-1 gap-3"> 
+              <a routerLink="/contacts" class="flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="margin-right: 80 px">
+                      <path fill="currentColor" fill-rule="evenodd" d="M11.293 3.293a1 1 0 0 1 1.414 0l6 6l2 2a1 1 0 0 1-1.414 1.414L19 12.414V19a2 2 0 0 1-2 2h-3a1 1 0 0 1-1-1v-3h-2v3a1 1 0 0 1-1 1H7a2 2 0 0 1-2-2v-6.586l-.293.293a1 1 0 0 1-1.414-1.414l2-2z" clip-rule="evenodd" />
+                  </svg>
+                  Home
+              </a>
+              <a routerLink="/corbeille" class="flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-400 hover:bg-opacity-25 rounded-2xl">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 32 32" style="margin-right: 8px">
+                      <path fill="currentColor" d="M12 4a5 5 0 1 1-5 5a5 5 0 0 1 5-5m0-2a7 7 0 1 0 7 7a7 7 0 0 0-7-7m10 28h-2v-5a5 5 0 0 0-5-5H9a5 5 0 0 0-5 5v5H2v-5a7 7 0 0 1 7-7h6a7 7 0 0 1 7 7zm0-26h10v2H22zm0 5h10v2H22zm0 5h7v2h-7z" />
+                  </svg>
+                   Corbeille
+              </a>
+             
+             
+          </div>
+      </nav>
+      </div>
+  </div>
+
+  <!-- Main content -->
+  <div class="flex flex-col flex-1 overflow-y-auto">
+      <div class="flex items-center justify-between h-16 bg-white border-b border-gray-200">
+          <div class="flex items-center px-4">
+      
+              <div class="relative mx-auto text-gray-600">
+                  <input class="border border-gray-300 h-10 w-96 px-5 pr-16 rounded-lg text-sm placeholder-current focus:outline-none dark:bg-gray-500 dark:border-gray-50 dark:text-gray-200"
+                         type="search" name="search" placeholder="Rechercher un contact"
+                     
+                         >
+                  <button type="submit" class="absolute left-0 top-0 mt-3 mr-4">
+                      <svg class="text-gray-600 dark:text-gray-200 h-4 w-4 fill-current"
+                           xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                           viewBox="0 0 56.966 56.966" xml:space="preserve" width="512px" height="512px">
+                          <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23 
+                           s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92 
+                           c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17 
+                           s-17-7.626-17-17S14.61,6,23.984,6z"/>
+                      </svg>
+                  </button>
               </div>
-              <div class="flex items-center rounded-b-lg lg:w-6/12 lg:rounded-e-lg lg:rounded-bl-none" style="background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593)">
-                <div class="px-4 py-6 text-white md:mx-6 md:p-12">
-                  <h4 class="mb-6 text-xl font-semibold">Rejoignez notre communauté</h4>
-                  <p class="text-sm">Ajoutez des contacts et restez en contact avec vos amis et collègues.</p>
+          </div>
+          <!-- notification -->
+          <div class="flex items-center space-x-4 mr-4">
+             
+              <!-- logout -->
+             
+          </div>
+      </div>
+      
+      <div class="mb-4 flex justify-between ">
+       
+        <button routerLink="/create" class=" px-12  bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition duration-300">Ajouter</button>
+      
+      </div>
+      
+        <section class="gradient-form h-full  ">
+          <div class="container h-full p-10">
+            <div class="flex h-full flex-wrap items-center justify-center text-neutral-800 dark:text-neutral-200">
+              <div class="w-full">
+                <div class="block rounded-lg bg-white shadow-lg ">
+                  <div class="g-0 lg:flex lg:flex-wrap">
+                    <div class="px-4 md:px-0 lg:w-6/12">
+                      <div class="md:mx-6 md:p-12">
+                        <div class="text-center">
+                          <h4 class="mb-12 mt-1 pb-1 text-xl font-semibold">Ajouter un Contact</h4>
+                        </div>
+                        <form (ngSubmit)="saveContact()">
+                          <div class="relative mb-4">
+                            <input
+                              type="text"
+                              class="peer py-4 block min-h-[auto] w-full rounded border-1 rounded-b-lg bg-gray-200 px-6"
+                              [(ngModel)]="nom"
+                              name="nom"
+                              placeholder="Nom"
+                              required />
+                          </div>
+                          <div class="relative mb-4">
+                            <input
+                              type="text"
+                              class="peer  py-4 block min-h-[auto] w-full rounded border-1 rounded-b-lg bg-gray-200 px-6"
+                              [(ngModel)]="prenom"
+                              name="prenom"
+                              placeholder="Prénom"
+                              required />
+                          </div>
+                          <div class="relative mb-4">
+                            <input
+                              type="email"
+                              class="peer block  py-4 min-h-[auto] w-full rounded border-1 rounded-b-lg bg-gray-200 px-6"
+                              [(ngModel)]="email"
+                              name="email"
+                              placeholder="Email"
+                              required />
+                          </div>
+                          <div class="relative mb-4">
+                            <input
+                              type="tel"
+                              class="peer block  py-4 min-h-[auto] w-full rounded border-1 rounded-b-lg bg-gray-200 px-6"
+                              [(ngModel)]="telephone"
+                              name="telephone"
+                              placeholder="Téléphone"
+                              required />
+                          </div>
+                          <div class="relative mb-4">
+                            <textarea
+                              class="peer block   py-8 min-h-[auto] w-full rounded border-1 rounded-b-lg bg-gray-200 px-6"
+                              [(ngModel)]="description"
+                              name="description"
+                              placeholder="Description"></textarea>
+                          </div>
+                          <div class="mb-12 pb-1 pt-1 text-center">
+                            <button
+                              class="bg-blue-500 mb-3 inline-block w-full rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-dark-3 transition duration-150 ease-in-out"
+                              type="submit"
+                              >
+                              Ajouter le Contact
+                            </button>
+                            <p *ngIf="errorMessage" class="text-red-600">{{ errorMessage }}</p>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                    <div class="flex items-center rounded-b-lg lg:w-6/12 lg:rounded-e-lg lg:rounded-bl-none bg-blue-500" >
+                      <div class="px-4 py-6 text-white md:mx-6 md:p-12">
+                        <h4 class="mb-6 text-xl font-semibold">Rejoignez notre communauté</h4>
+                        <p class="text-sm">Ajoutez des contacts et restez en contact avec vos amis et collègues.</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+        </section>
+     
         </div>
-      </div>
-    </div>
-  </section>
+  </div>
+  
